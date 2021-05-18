@@ -1,5 +1,5 @@
 # rextester-bot
-A Simple But Powerful TelegramBot
+A Simple But Powerful TelegramBot to Test Your Code with Rextester Webservice
 
 # Install
 1. Put Your Telegram Bot Token in Line 3 (This Project Doesnt Need Rextester Api Key!)
