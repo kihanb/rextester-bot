@@ -8,6 +8,7 @@ function Bot($method,$datas=[]){
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch,CURLOPT_POSTFIELDS,$datas);
     $res = curl_exec($ch);
+    curl_close($ch);
     if(curl_error($ch)){
         var_dump(curl_error($ch));
     }else{
@@ -16,13 +17,14 @@ function Bot($method,$datas=[]){
 }
 
 function run ($lang,$code){
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'https://rextester.com/rundotnet/Run');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, "LanguageChoiceWrapper=$lang&Program=".urlencode($code));
-return json_decode(curl_exec($ch),true);
-curl_close($ch);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://rextester.com/rundotnet/Run');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "LanguageChoiceWrapper=$lang&Program=".urlencode($code));
+    $data = json_decode(curl_exec($ch),true);
+    curl_close($ch);
+    return $data;
 }
 
 $update = json_decode(file_get_contents('php://input'));
